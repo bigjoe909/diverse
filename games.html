@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101a1c">
+    <meta name="description" content="Play chess, snooker, ludo, and whot with DI-VERSE members.">
+    <link rel="stylesheet" href="style.css">
+    <title>Game Room | DI-VERSE</title>
+</head>
+<body class="games-body">
+    <header class="community-header games-header">
+        <a class="brand" href="/home.html" aria-label="DI-VERSE home">
+            <span class="brand-mark" aria-hidden="true">D</span>
+            <span>DI-VERSE</span>
+        </a>
+        <nav class="games-top-nav" aria-label="Main navigation">
+            <a href="/home.html">Home</a>
+            <a href="/community.html#posts">Community</a>
+            <span id="games-user-name">Loading account…</span>
+            <button id="games-sign-out" type="button">Sign out</button>
+        </nav>
+    </header>
+
+    <main class="games-shell">
+        <section class="games-heading">
+            <div>
+                <span class="eyebrow">DI-VERSE TABLES</span>
+                <h1>Pick your game.</h1>
+                <p>Choose a table, share its code, and take your turn.</p>
+            </div>
+            <div class="games-heading-mark" aria-hidden="true">♟</div>
+        </section>
+
+        <p class="form-message games-message" id="games-message" role="status" aria-live="polite"></p>
+
+        <section class="games-lobby" id="games-lobby" aria-label="Game lobby">
+            <div class="games-panel">
+                <div class="games-panel-heading">
+                    <div>
+                        <span class="eyebrow">OPEN A TABLE</span>
+                        <h2>Choose a game</h2>
+                    </div>
+                </div>
+                <div class="game-picks" role="group" aria-label="Choose a game">
+                    <button class="game-pick is-selected" type="button" data-game="chess" aria-pressed="true">
+                        <span class="game-pick-mark chess-mark" aria-hidden="true">♞</span>
+                        <span class="game-pick-copy"><strong>Chess</strong><small>Classic strategy</small></span>
+                    </button>
+                    <button class="game-pick" type="button" data-game="ludo" aria-pressed="false">
+                        <span class="game-pick-mark ludo-mark" aria-hidden="true">●</span>
+                        <span class="game-pick-copy"><strong>Ludo</strong><small>Race to home</small></span>
+                    </button>
+                    <button class="game-pick" type="button" data-game="whot" aria-pressed="false">
+                        <span class="game-pick-mark whot-mark" aria-hidden="true">◇</span>
+                        <span class="game-pick-copy"><strong>Whot</strong><small>Match and play</small></span>
+                    </button>
+                    <button class="game-pick" type="button" data-game="snooker" aria-pressed="false">
+                        <span class="game-pick-mark snooker-mark" aria-hidden="true">◉</span>
+                        <span class="game-pick-copy"><strong>Snooker</strong><small>Take a shot</small></span>
+                    </button>
+                </div>
+                <button class="submit-button games-create" id="create-room" type="button">Create table <span aria-hidden="true">→</span></button>
+            </div>
+
+            <div class="games-panel join-panel">
+                <div class="games-panel-heading">
+                    <div>
+                        <span class="eyebrow">JOIN A FRIEND</span>
+                        <h2>Enter a room code</h2>
+                    </div>
+                </div>
+                <form id="join-room-form" class="join-room-form">
+                    <label for="room-code">Six-character code</label>
+                    <div class="join-room-row">
+                        <input id="room-code" name="code" maxlength="6" pattern="[A-HJ-NP-Z2-9]{6}" autocomplete="off" required>
+                        <button class="secondary-button" type="submit">Join</button>
+                    </div>
+                </form>
+                <div class="open-room-heading">
+                    <h3>Waiting for a player</h3>
+                    <button class="icon-refresh" id="refresh-rooms" type="button" aria-label="Refresh open tables" title="Refresh">↻</button>
+                </div>
+                <div class="open-room-list" id="open-room-list" aria-live="polite"></div>
+            </div>
+        </section>
+
+        <section class="game-table is-hidden" id="game-table" aria-label="Game table">
+            <div class="game-table-head">
+                <div>
+                    <span class="eyebrow" id="table-game-label">GAME</span>
+                    <h2 id="table-title">Waiting for a player</h2>
+                </div>
+                <div class="table-room-code">
+                    <span>ROOM</span>
+                    <strong id="table-room-code">------</strong>
+                    <button class="icon-refresh" id="copy-room-code" type="button" aria-label="Copy room code" title="Copy code">▢</button>
+                </div>
+            </div>
+            <div class="table-players" id="table-players"></div>
+            <p class="turn-message" id="turn-message" aria-live="polite"></p>
+            <div class="game-board" id="game-board"></div>
+            <div class="table-controls" id="table-controls"></div>
+            <button class="secondary-button leave-table" id="leave-table" type="button">Back to lobby</button>
+        </section>
+
+        <footer class="games-footer">Private local tables · Game rooms are available on this app instance.</footer>
+    </main>
+    <script src="auth-service.js"></script>
+    <script src="games.js"></script>
+</body>
+</html>

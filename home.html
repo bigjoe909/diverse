@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080d20">
+    <meta name="description" content="Your DI-VERSE homepage.">
+    <link rel="stylesheet" href="style.css">
+    <title>Home | DI-VERSE</title>
+</head>
+<body>
+    <main class="page">
+        <a class="brand" href="home.html" aria-label="DI-VERSE home">
+            <span class="brand-mark" aria-hidden="true">D</span>
+            <span>DI-VERSE</span>
+        </a>
+
+        <section class="login-card home-card" aria-labelledby="home-title">
+            <span class="eyebrow">YOUR UNIVERSE</span>
+            <h1 id="home-title">Welcome, <span id="welcome-name">traveller</span></h1>
+            <p class="home-intro">You’re signed in. Your account details are securely loaded from the local account database.</p>
+
+            <div class="account-details" aria-live="polite">
+                <div>
+                    <span class="detail-label">Account email</span>
+                    <span class="detail-value" id="account-email">Loading…</span>
+                </div>
+                <div>
+                    <span class="detail-label">Member since</span>
+                    <span class="detail-value" id="account-created">Loading…</span>
+                </div>
+            </div>
+
+            <a class="submit-button home-community-link" href="/community.html#posts">Explore DI-VERSE <span aria-hidden="true">→</span></a>
+            <nav class="home-shortcuts" aria-label="DI-VERSE pages">
+                <a href="/community.html#profile">My profile</a>
+                <a href="/community.html#friends">Friends</a>
+                <a href="/community.html#chat">Messages</a>
+                <a href="/community.html#map">Friend map</a>
+                <a href="/community.html#posts">Community posts</a>
+                <a href="/community.html#documents">PDF library</a>
+                <a href="/community.html#marketplace">Business &amp; jobs</a>
+                <a href="/games.html">Game room</a>
+                <a href="/movies.html">Movies</a>
+            </nav>
+            <p class="form-message is-visible" id="home-message" role="status" aria-live="polite">Checking your sign-in…</p>
+            <button class="secondary-button" id="sign-out" type="button" disabled>Sign out</button>
+        </section>
+
+        <footer class="page-footer">
+            <span>© 2026 DI-VERSE</span>
+            <span class="footer-note"><span aria-hidden="true"></span>Welcome to your universe</span>
+        </footer>
+    </main>
+    <script src="auth-service.js"></script>
+    <script src="home.js"></script>
+</body>
+</html>

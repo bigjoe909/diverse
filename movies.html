@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0c1716">
+    <meta name="description" content="Watch and share movies with DI-VERSE members.">
+    <link rel="stylesheet" href="style.css">
+    <title>Movies | DI-VERSE</title>
+</head>
+<body class="movies-body">
+    <header class="community-header movies-header">
+        <a class="brand" href="/home.html" aria-label="DI-VERSE home"><span class="brand-mark" aria-hidden="true">D</span><span>DI-VERSE</span></a>
+        <nav class="games-top-nav" aria-label="Main navigation">
+            <a href="/home.html">Home</a>
+            <a href="/community.html#posts">Community</a>
+            <span id="movies-user-name">Loading account…</span>
+            <button id="movies-sign-out" type="button">Sign out</button>
+        </nav>
+    </header>
+
+    <main class="movies-shell">
+        <section class="movies-heading">
+            <div>
+                <span class="eyebrow">MEMBER SCREENINGS</span>
+                <h1>Movies</h1>
+                <p>Share films you have the right to distribute. Stream from this local library.</p>
+            </div>
+            <span class="movies-reel" aria-hidden="true">▶</span>
+        </section>
+        <p class="form-message movies-message" id="movies-message" role="status" aria-live="polite"></p>
+
+        <section class="movies-layout">
+            <form class="movie-upload-panel" id="movie-upload-form">
+                <span class="eyebrow">ADD TO THE LIBRARY</span>
+                <h2>Share a movie</h2>
+                <label for="movie-title">Title</label>
+                <input id="movie-title" name="title" maxlength="120" required>
+                <label for="movie-description">Description</label>
+                <textarea id="movie-description" name="description" maxlength="1000" rows="3"></textarea>
+                <label for="movie-file">Movie file (MP4 or WebM, up to 1 GB)</label>
+                <input id="movie-file" name="file" type="file" accept="video/mp4,.mp4,video/webm,.webm" required>
+                <label class="movie-rights" for="movie-rights">
+                    <input id="movie-rights" name="rightsConfirmed" type="checkbox" required>
+                    <span>I own this movie or have permission to share it.</span>
+                </label>
+                <progress class="movie-upload-progress is-hidden" id="movie-upload-progress" max="100" value="0"></progress>
+                <span class="movie-upload-status" id="movie-upload-status" aria-live="polite"></span>
+                <button class="submit-button" id="movie-upload-button" type="submit">Upload movie <span aria-hidden="true">→</span></button>
+            </form>
+
+            <section class="movie-library" aria-label="Movie library">
+                <div class="movie-library-heading">
+                    <div>
+                        <span class="eyebrow">THE LIBRARY</span>
+                        <h2>Recently shared</h2>
+                    </div>
+                    <button class="icon-refresh" id="refresh-movies" type="button" aria-label="Refresh movies" title="Refresh">↻</button>
+                </div>
+                <div class="movie-grid" id="movie-list" aria-live="polite"></div>
+            </section>
+        </section>
+        <footer class="games-footer">Movies are stored in this app’s local SQL database and available to signed-in members.</footer>
+    </main>
+
+    <dialog class="report-dialog" id="movie-report-dialog">
+        <form id="movie-report-form">
+            <div class="report-dialog-heading">
+                <h2>Report member</h2>
+                <button class="icon-refresh" id="close-movie-report" type="button" aria-label="Close report form">×</button>
+            </div>
+            <input type="hidden" name="userId">
+            <label for="movie-report-category">Reason</label>
+            <select id="movie-report-category" name="category" required>
+                <option value="scam">Scam</option><option value="fraud">Fraud</option><option value="impersonation">Impersonation</option><option value="harassment">Harassment</option><option value="other">Other</option>
+            </select>
+            <label for="movie-report-details">Details (20–1,200 characters)</label>
+            <textarea id="movie-report-details" name="details" minlength="20" maxlength="1200" rows="4" required></textarea>
+            <button class="submit-button" type="submit">Send report</button>
+        </form>
+    </dialog>
+    <script src="auth-service.js"></script>
+    <script src="movies.js"></script>
+</body>
+</html>

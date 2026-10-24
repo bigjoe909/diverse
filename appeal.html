@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#151b1b">
+    <meta name="description" content="Request a review of your DI-VERSE account restriction.">
+    <link rel="stylesheet" href="style.css">
+    <title>Account review | DI-VERSE</title>
+</head>
+<body class="appeal-body">
+    <main class="appeal-shell">
+        <a class="brand" href="/" aria-label="DI-VERSE sign in"><span class="brand-mark" aria-hidden="true">D</span><span>DI-VERSE</span></a>
+        <section class="appeal-panel">
+            <span class="eyebrow">ACCOUNT REVIEW</span>
+            <h1>Request a review</h1>
+            <p id="appeal-ban-reason" class="appeal-ban-reason"></p>
+            <form id="appeal-form" class="community-form">
+                <label for="appeal-reason">Why should your account be unbanned? (20–2,000 characters)</label>
+                <textarea id="appeal-reason" name="reason" minlength="20" maxlength="2000" rows="7" required></textarea>
+                <button class="submit-button" id="appeal-submit" type="submit">Send appeal</button>
+            </form>
+            <div id="appeal-status" class="appeal-status is-hidden" aria-live="polite"></div>
+            <p class="form-message" id="appeal-message" role="status" aria-live="polite"></p>
+            <button class="secondary-button" id="appeal-sign-out" type="button">Sign out</button>
+        </section>
+    </main>
+    <script src="auth-service.js"></script>
+    <script src="appeal.js"></script>
+</body>
+</html>

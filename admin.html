@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080d20">
+    <meta name="description" content="Private DI-VERSE account administration.">
+    <link rel="stylesheet" href="style.css">
+    <title>Admin | DI-VERSE</title>
+</head>
+<body class="admin-body">
+    <main class="page">
+        <a class="brand" href="index.html" aria-label="DI-VERSE home">
+            <span class="brand-mark" aria-hidden="true">D</span>
+            <span>DI-VERSE</span>
+        </a>
+
+        <section class="login-card admin-card" aria-labelledby="admin-title">
+            <div class="card-heading">
+                <span class="eyebrow">PRIVATE ADMIN AREA</span>
+                <h1 id="admin-title">DI-VERSE dashboard</h1>
+                <p id="admin-subtitle">Sign in to manage locally stored accounts.</p>
+            </div>
+
+            <form id="admin-login-form">
+                <label for="admin-email">Owner email</label>
+                <div class="input-wrap">
+                    <input id="admin-email" name="email" type="email" autocomplete="username" required readonly>
+                </div>
+                <label class="signup-field-label" for="admin-password">Admin password</label>
+                <div class="input-wrap">
+                    <input id="admin-password" name="password" type="password" autocomplete="current-password" required>
+                </div>
+                <button class="submit-button admin-submit" type="submit">Sign in to dashboard</button>
+            </form>
+
+            <div id="dashboard" class="is-hidden">
+                <div class="dashboard-summary">
+                    <span class="eyebrow">SAVED ACCOUNTS</span>
+                    <strong id="account-count">0</strong>
+                    <span class="online-summary"><span id="online-count">0</span> online</span>
+                </div>
+                <p class="dashboard-note">Search accounts, review reports and appeals, and manage access. Passwords are never displayed.</p>
+                <form class="admin-search-form" id="account-search-form">
+                    <label for="account-search">Find user by name or email</label>
+                    <div class="admin-search-row">
+                        <input id="account-search" name="q" type="search" maxlength="100" autocomplete="off">
+                        <button class="secondary-button" type="submit">Search</button>
+                    </div>
+                </form>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th>Name</th><th>Email</th><th>Registered</th><th>Access</th><th>Action</th></tr>
+                        </thead>
+                        <tbody id="account-list"></tbody>
+                    </table>
+                    <p id="empty-state" class="empty-state is-hidden">No accounts have registered yet.</p>
+                </div>
+                <button class="secondary-button" id="refresh-accounts" type="button">Refresh list</button>
+                <section class="admin-inbox-section" aria-labelledby="reports-title">
+                    <div class="admin-inbox-heading"><div><span class="eyebrow">COMMUNITY SAFETY</span><h2 id="reports-title">User reports</h2></div><button class="secondary-button" id="refresh-reports" type="button">Refresh</button></div>
+                    <div class="admin-inbox-list" id="report-list" aria-live="polite"></div>
+                </section>
+                <section class="admin-inbox-section" aria-labelledby="appeals-title">
+                    <div class="admin-inbox-heading"><div><span class="eyebrow">ACCESS REVIEWS</span><h2 id="appeals-title">Unban appeals</h2></div><button class="secondary-button" id="refresh-appeals" type="button">Refresh</button></div>
+                    <div class="admin-inbox-list" id="appeal-list" aria-live="polite"></div>
+                </section>
+                <button class="secondary-button" id="admin-logout" type="button">Sign out</button>
+            </div>
+
+            <p class="form-message" id="admin-message" role="status" aria-live="polite"></p>
+            <p class="signup-prompt"><a href="index.html">← Back to sign in</a></p>
+        </section>
+
+        <footer class="page-footer">
+            <span>Stored locally on this computer</span>
+            <span class="footer-note"><span aria-hidden="true"></span>Admin access protected</span>
+        </footer>
+    </main>
+    <dialog class="report-dialog" id="ban-dialog">
+        <form id="ban-form">
+            <div class="report-dialog-heading"><h2>Ban account</h2><button class="icon-refresh" id="close-ban-dialog" type="button" aria-label="Close">×</button></div>
+            <input type="hidden" name="userId">
+            <label for="ban-reason">Reason</label>
+            <textarea id="ban-reason" name="reason" minlength="5" maxlength="500" rows="4" required></textarea>
+            <button class="submit-button" type="submit">Confirm ban</button>
+        </form>
+    </dialog>
+    <script src="auth-service.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

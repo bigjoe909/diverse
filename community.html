@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080d20">
+    <meta name="description" content="Connect, chat, share and discover on DI-VERSE.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <title>Community | DI-VERSE</title>
+</head>
+<body class="community-body">
+    <header class="community-header">
+        <a class="brand" href="/home.html" aria-label="DI-VERSE home">
+            <span class="brand-mark" aria-hidden="true">D</span>
+            <span>DI-VERSE</span>
+        </a>
+        <div class="community-account">
+            <span id="community-user-name">Loading account…</span>
+            <a href="/home.html">Home</a>
+            <button id="community-sign-out" type="button">Sign out</button>
+        </div>
+    </header>
+
+    <main class="community-layout">
+        <nav class="community-nav" aria-label="Community pages">
+            <a href="#posts" data-page="posts">Community posts</a>
+            <a href="#profile" data-page="profile">My profile</a>
+            <a href="#friends" data-page="friends">Friends</a>
+            <a href="#chat" data-page="chat">Messages <span class="nav-badge is-hidden" id="unread-message-count" aria-label="Unread messages">0</span></a>
+            <a href="#map" data-page="map">Friend map</a>
+            <a href="#documents" data-page="documents">PDF library</a>
+            <a href="#marketplace" data-page="marketplace">Business &amp; jobs</a>
+            <a href="/games.html">Game room</a>
+            <a href="/movies.html">Movies</a>
+        </nav>
+
+        <div class="community-content">
+            <p id="community-message" class="form-message community-message" role="status" aria-live="polite"></p>
+
+            <section class="community-page" id="page-posts" data-community-page="posts">
+                <div class="section-heading">
+                    <span class="eyebrow">YOUR COMMUNITY</span>
+                    <h1>Community posts</h1>
+                    <p>Share an update and see what's happening in DI-VERSE.</p>
+                </div>
+                <form class="community-form" id="post-form">
+                    <label for="post-content">Write a post</label>
+                    <textarea id="post-content" name="content" maxlength="2000" rows="4" placeholder="What's on your mind?" required></textarea>
+                    <label for="post-media">Image or video (optional, up to 20 MB)</label>
+                    <input id="post-media" name="media" type="file" accept="image/jpeg,image/png,image/gif,image/webp,video/mp4,video/webm">
+                    <button class="submit-button" type="submit">Publish post <span aria-hidden="true">→</span></button>
+                </form>
+                <div class="content-list" id="post-list" aria-live="polite"></div>
+            </section>
+
+            <section class="community-page is-hidden" id="page-map" data-community-page="map">
+                <div class="section-heading">
+                    <span class="eyebrow">FRIEND LOCATIONS</span>
+                    <h1>Live friend map</h1>
+                    <p>Locations are shared only with accepted friends and expire after 10 minutes. Sharing is off until you enable it.</p>
+                </div>
+                <div class="map-controls">
+                    <button class="secondary-button" id="toggle-location-share" type="button">Share my location</button>
+                    <span class="location-share-status" id="location-share-status" role="status" aria-live="polite">Your location is not being shared.</span>
+                </div>
+                <div class="friend-map" id="friend-map" aria-label="Map of friends who opted in to sharing"></div>
+                <div class="map-friend-list" id="map-friend-list" aria-live="polite"></div>
+            </section>
+
+            <section class="community-page is-hidden" id="page-profile" data-community-page="profile">
+                <div class="section-heading">
+                    <span class="eyebrow">YOUR ACCOUNT</span>
+                    <h1>My profile</h1>
+                    <p>Tell the community a little about yourself.</p>
+                </div>
+                <form class="community-form" id="profile-form">
+                    <div class="profile-picture-editor">
+                        <div class="profile-picture-preview-wrap">
+                            <img class="profile-avatar is-hidden" id="profile-picture-preview" alt="Your profile picture">
+                            <span class="profile-avatar-placeholder" id="profile-picture-placeholder" aria-hidden="true">?</span>
+                        </div>
+                        <div class="profile-picture-controls">
+                            <label for="profile-picture-file">Profile picture</label>
+                            <input id="profile-picture-file" name="picture" type="file" accept="image/jpeg,image/png,image/gif,image/webp">
+                            <div class="profile-picture-actions">
+                                <button class="secondary-button" id="upload-profile-picture" type="button">Upload picture</button>
+                                <button class="secondary-button" id="remove-profile-picture" type="button" disabled>Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <label for="profile-name">Name</label>
+                    <input id="profile-name" name="name" maxlength="100" required>
+                    <label for="profile-email">Email</label>
+                    <input id="profile-email" name="email" type="email" readonly>
+                    <label for="profile-bio">About me</label>
+                    <textarea id="profile-bio" name="bio" maxlength="500" rows="4" placeholder="Add a short introduction"></textarea>
+                    <label for="profile-skills">Skills and interests</label>
+                    <input id="profile-skills" name="skills" maxlength="250" placeholder="e.g. design, tutoring, coding">
+                    <button class="submit-button" type="submit">Save profile <span aria-hidden="true">→</span></button>
+                </form>
+            </section>
+
+            <section class="community-page is-hidden" id="page-friends" data-community-page="friends">
+                <div class="section-heading">
+                    <span class="eyebrow">MAKE CONNECTIONS</span>
+                    <h1>Friends</h1>
+                    <p>Find members by name or email, send requests, and accept invitations.</p>
+                </div>
+                <form class="community-form inline-form" id="friend-search-form">
+                    <label for="friend-search">Find people</label>
+                    <div class="form-row">
+                        <input id="friend-search" name="q" maxlength="100" placeholder="Search name or email">
+                        <button class="secondary-button" type="submit">Search</button>
+                    </div>
+                </form>
+                <h2 class="subheading">People you may know</h2>
+                <div class="content-list" id="people-list"></div>
+                <h2 class="subheading">Friend requests</h2>
+                <div class="content-list" id="request-list"></div>
+                <h2 class="subheading">Your friends</h2>
+                <div class="content-list" id="friend-list"></div>
+            </section>
+
+            <section class="community-page is-hidden" id="page-chat" data-community-page="chat">
+                <div class="section-heading">
+                    <span class="eyebrow">STAY IN TOUCH</span>
+                    <h1>Messages</h1>
+                    <p>Choose an accepted friend to open your conversation.</p>
+                    <button class="secondary-button notification-opt-in" id="enable-message-notifications" type="button">Enable browser alerts</button>
+                </div>
+                <label for="chat-friend">Chat with</label>
+                <select class="community-select" id="chat-friend">
+                    <option value="">Choose a friend</option>
+                </select>
+                <div class="chat-participants is-hidden" id="chat-participants" aria-live="polite">
+                    <div class="chat-person">
+                        <div class="chat-person-avatar">
+                            <img class="is-hidden" id="chat-current-picture" alt="">
+                            <span id="chat-current-initial" aria-hidden="true">?</span>
+                        </div>
+                        <strong id="chat-current-name">You</strong>
+                    </div>
+                    <span class="chat-between" aria-hidden="true">↔</span>
+                    <div class="chat-person">
+                        <div class="chat-person-avatar">
+                            <img class="is-hidden" id="chat-friend-picture" alt="">
+                            <span id="chat-friend-initial" aria-hidden="true">?</span>
+                        </div>
+                        <strong id="chat-friend-name">Choose a friend</strong>
+                    </div>
+                </div>
+                <div class="chat-thread" id="chat-thread" aria-live="polite"></div>
+                <form class="community-form inline-form" id="chat-form">
+                    <label for="chat-content">Your message</label>
+                    <div class="form-row">
+                        <input id="chat-content" name="content" maxlength="2000" placeholder="Write a message…" required>
+                        <button class="secondary-button" type="submit">Send</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="community-page is-hidden" id="page-documents" data-community-page="documents">
+                <div class="section-heading">
+                    <span class="eyebrow">SHARE RESOURCES</span>
+                    <h1>PDF library</h1>
+                    <p>Upload or download a PDF. Signed-in members can access shared files. Maximum size: 10 MB.</p>
+                </div>
+                <form class="community-form" id="document-form">
+                    <label for="pdf-file">Choose a PDF</label>
+                    <input id="pdf-file" name="file" type="file" accept="application/pdf,.pdf" required>
+                    <button class="submit-button" type="submit">Upload PDF <span aria-hidden="true">→</span></button>
+                </form>
+                <div class="content-list" id="document-list"></div>
+            </section>
+
+            <section class="community-page is-hidden" id="page-marketplace" data-community-page="marketplace">
+                <div class="section-heading">
+                    <span class="eyebrow">SHARE OPPORTUNITIES</span>
+                    <h1>Business, jobs &amp; skills</h1>
+                    <p>Post a business, job, skill, or product listing. Buyers and hirers contact you directly; payments are not processed here.</p>
+                </div>
+                <form class="community-form" id="listing-form">
+                    <label for="listing-category">Listing type</label>
+                    <select id="listing-category" name="category" required>
+                        <option value="business">Business</option>
+                        <option value="job">Job</option>
+                        <option value="skill">Skill for hire</option>
+                        <option value="product">Product</option>
+                    </select>
+                    <label for="listing-title">Title</label>
+                    <input id="listing-title" name="title" maxlength="120" placeholder="What are you offering?" required>
+                    <label for="listing-description">Description</label>
+                    <textarea id="listing-description" name="description" maxlength="1000" rows="4" placeholder="Include helpful details" required></textarea>
+                    <label for="listing-price">Price (optional)</label>
+                    <input id="listing-price" name="price" type="number" min="0" step="0.01" placeholder="0.00">
+                    <label for="listing-media">Business or listing image/video (optional, up to 20 MB)</label>
+                    <input id="listing-media" name="media" type="file" accept="image/jpeg,image/png,image/gif,image/webp,video/mp4,video/webm">
+                    <button class="submit-button" type="submit">Publish listing <span aria-hidden="true">→</span></button>
+                </form>
+                <div class="content-list" id="listing-list"></div>
+            </section>
+
+            <footer class="community-footer">Private local community · Account data is stored in this computer’s SQL database</footer>
+        </div>
+    </main>
+    <dialog class="report-dialog" id="community-report-dialog">
+        <form id="community-report-form">
+            <div class="report-dialog-heading"><h2 id="community-report-title">Report member</h2><button class="icon-refresh" id="close-community-report" type="button" aria-label="Close">×</button></div>
+            <input type="hidden" name="userId">
+            <label for="community-report-category">Reason</label>
+            <select id="community-report-category" name="category" required>
+                <option value="scam">Scam</option><option value="fraud">Fraud</option><option value="impersonation">Impersonation</option><option value="harassment">Harassment</option><option value="other">Other</option>
+            </select>
+            <label for="community-report-details">Details (20–1,200 characters)</label>
+            <textarea id="community-report-details" name="details" minlength="20" maxlength="1200" rows="4" required></textarea>
+            <button class="submit-button" type="submit">Send report</button>
+        </form>
+    </dialog>
+    <script src="auth-service.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="community.js"></script>
+</body>
+</html>
